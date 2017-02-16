@@ -60,3 +60,43 @@ void PrimeAfter(int *prime) {
 	*prime = value;
 	return;
 }
+
+/***********************************
+ * input 3 would print ABC BCA CAB *
+ ***********************************/
+void PrintChar(int a) {
+	for (int row = 0; row < a; row++) {
+		for (int col = 0; col < a; col++) {
+			
+			//repeat to the first letter
+			printf("%c", 'A' + ((col + row) % a));
+		}
+		printf("\n");
+	}
+}
+
+//function can sort out the number
+void Rearrange(int numArray[], int numVal) {
+	int temp;
+	int i;
+	int j = numVal;
+	
+	//move out the largest number
+	while (j > 0) {
+		
+		//switch the number to left if it is greater
+		for (i = 0; i < (j - 2); i++) {
+			temp = numArray[i];
+			if (numArray[i + 1] <= numArray[i]) {
+				temp = numArray[i + 1];
+				numArray[i + 1] = numArray[i];
+				numArray[i] = temp;
+			}
+		}
+		j--;
+	}
+
+	for (i = 0; i < numVal; i++) {
+		printf("%d\n", numArray[i]);
+	}
+}
