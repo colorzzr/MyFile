@@ -100,3 +100,18 @@ void Rearrange(int numArray[], int numVal) {
 		printf("%d\n", numArray[i]);
 	}
 }
+
+
+/*//this is a dynamic memory allocation
+void ChooseTheTypeOfMemory(double pass1, double *newPass1Laction, char pass2, char *newPass2Location) {
+	char type;
+
+	printf("please enter your type (d for double and int, c for char");
+	scanf("&c", &type);
+	if (type == 'd') {
+		
+
+	}
+
+
+}*/
