@@ -231,3 +231,132 @@ void Print10repeteated (){
     }
 }
 
+//happy function to calculate 126 = 6 + 2 ^ 2 +1^3
+void CalThe126(){
+    int num ;
+    int temp; 
+    int count = 0;
+    int array[count];
+    int sum = 0;
+   
+    printf("please enter your number");
+    scanf("%d", &num);
+    temp = num;
+    
+    
+    //check the length
+    while (temp != 0){
+        temp = temp / 10;
+        count++;
+    }
+
+    //cal
+    for (int i = count; i > 0; i--){
+
+        array[i] = num / (pow(10,i -1));
+        sum =sum + pow(array[i],i);
+        num=num - ((pow(10, i - 1)) * array[i]);
+        
+        printf("%d ", array[i]);
+        printf("%d ",num);
+        printf("%d\n",sum);    
+       
+    }
+    return;
+}
+
+//happy function input 123 output 231
+void RotateVar(int a, int b, int c){
+    //rotate the a and b
+    int temp;
+    temp = a;
+    a = b;
+    b = temp;
+    
+    //rotate the b(a) and c
+    temp = b;
+    b = c;
+    c = temp;
+    
+    printf("a:%d b:%d c:%d\n", a, b, c);
+    
+    return;
+}
+
+/*******************************************
+ * happy function                          *
+ * add 1 to 1000 with following conditions *
+ * 1) can be divided by 3                  *
+ * 2) odd                                  *
+ * 3) no 5 in tenth                        *
+ *******************************************/ 
+ 
+void Calculate1to1000withoddanddivide3andno5intenth(){
+    //initialize to 6 cs the 6 is valid
+    int sum = 6;
+    
+    for (int i = 1; i <= 1000; i++){
+        if (i % 3 == 0 && i % 2 == 0 && !((i/10) % 5 == 0)){
+            sum = sum + i;
+            printf("%d\n" , i);
+        }
+    }
+    
+    printf("%d", sum);
+    
+    return;
+}
+
+//print the calender for specific month and with starting day
+void Calender(){
+    int month, startDay;
+    
+    printf("Enter the number of corresponding to month (1=Jan, 12=Dec): ");
+    scanf("%d", &month);
+    printf("Enter the Starting day of the week(1=Sun, 7=Sat): ");
+    scanf("%d", &startDay);
+    
+    //leave the space for startingday
+    for(int i = 1; i< startDay; i++){
+        printf("   ");
+    }
+    
+    //print out the calender
+    //for the 31days months
+    if(month == 1 && month == 3&& month == 5&& month == 7&& month == 8&& month == 10&& month == 12){
+        for (int i = 1; i <= 31; i++){
+            printf("%2d ", i);
+        
+            //change line for next week
+            if ((startDay - 1 +i)%7 == 0){
+                printf("\n");
+            }
+        }
+    }
+    
+    //for 30days month
+    if(month == 4 && month == 6&& month == 9&& month == 11){
+        for (int i = 1; i <= 30; i++){
+            printf("%2d ", i);
+        
+            //change line for next week
+            if ((startDay - 1 +i)%7 == 0){
+                printf("\n");
+            }
+        }
+    }
+    
+    //for feb
+    else{
+        for (int i = 1; i <= 28; i++){
+            printf("%2d ", i);
+        
+            //change line for next week
+            if ((startDay - 1 +i)%7 == 0){
+                printf("\n");
+            }
+        }
+    }
+    
+    return;
+}
