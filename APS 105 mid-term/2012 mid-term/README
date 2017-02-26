@@ -1,1 +1,49 @@
 
+Question 10 [12 Marks]
+Give the implementation of a function called bothMinAndMax that computes both the minimum
+and maximum values of three integer parameters x, y, and z, and returns the minimum and
+maximum values via the pointer parameters minPtr and maxPtr.
+Note 1: you must also add a proper call to bothMinAndMax in the main function below, in the
+position indicated, such that bothMinAndMax will modify smallest to contain the minimum of
+a, b, and c, and will modify largest to contain the maximum of a, b, and c.
+For the values of a, b, and c given below, main will print: Of 7, 5, and 9, 5 is the
+smallest and 9 is the largest.
+Note 2: your implementation of bothMinAndMax should work for any input values of x, y, and
+z, not just the example values given below.
+Note 3: when two variables have the same value, you can return either one; e.g., if x has the same
+value as y, and both are less than z, you can return either x or y as the minimum value.
+
+
+Question 11 [12 Marks]
+Write a complete C program that guesses a user’s secret number, denoted by s, by successively
+prompting the user to answer yes/no questions that narrow the range of possible values for the
+secret number. The program first prompts the user to enter a range of values [min, max] such that
+min ≤ s ≤ max. The program starts by asking the user
+“Is your secret number greater than min +(max − mi
+n)/2?”
+If the user answers “yes”, then we know that the user’s secret number lies in the range [min + max − min
+2 +
+1, max]; otherwise the number lies in [min, min + max − min
+2
+]. Therefore, after each round of questioning,
+the values of min and max are further refined (the range of values is divided by half).
+The program continues to ask the question (after refining the min and max values based on user’s
+response) until the value of min is equal to max. When the value of min = max, then the program
+has found the user’s secret number, which is equal to s = min = max, and the program prints
+user’s secret value and terminates.
+Assume all user inputs including user’s secret numbers are valid integers and min ≤ max. Also
+assume that the user enters “1” for “yes” and “0” for “no”.
+
+Question 12 [12 Marks]
+Write a complete C program that performs the following tasks.
+• Asks the user for a non-zero positive integer and stores it in the variable num;
+• Prints the numbers between 1 and num (inclusive), but
+– For multiples of three prints “Bizz” instead of the number.
+– For multples of five prints “Buzz” instead of the number.
+– For multiples of both three and five prints “BizzBuzz” instead of the number.
+• prints the sum of all the numbers between 1 and num not including Bizz, Buzz, and BizzBuzz
+(i.e., the sum of all the non-Bizz, non-Buzz and non-BizzBuzz numbers).
+You can assume that the user provides the correct input, a positive integer that fits within the
+range of an int variable (i.e. You do not have to explicitly check the sign and range of the integer).
+You are not allowed to use any other header file other than stdio.h. The following is an
+example run of the program with the data entered by the user displayed in bold font
