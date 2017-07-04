@@ -14,6 +14,7 @@
 #include <cstdlib>
 #include <iostream>
 
+
 using namespace std;
 /************************************************
  * Heapsort algorithm                           *
@@ -24,16 +25,11 @@ using namespace std;
  * the array is starting at 0 ending n - 1      *
  * but heap start with 1 ending with n          *
  ************************************************/
-
-
-
-//to create a pack for size with array
 typedef struct Arr{
-    int array[16];
+    int *array;
     int size;
     int heapsize;
 }arr;
-    
 //create random array
 void generateRandom (arr* array){
     for(int i = 0; i < array->size; i++){
@@ -89,13 +85,9 @@ void maxHeapify (arr* A, int i){
     
     //make sure the largest is parent
     if (largest != i){
-        //cout << endl << A->array[i] << " " << A->array[largest] << endl;
         int temp = A->array[i];
         A->array[i] = A->array[largest];
         A->array[largest] = temp;
-        //cout << endl << A->array[i] << " " << A->array[largest] << endl;
-        
-        printArr(A);
         //get down
         maxHeapify(A, largest);
     }
@@ -103,21 +95,94 @@ void maxHeapify (arr* A, int i){
 
 //function is to build the heap tree not sort
 void buildHeap (arr* A){
+    cout << "----------Building the heap-----------" << endl;
     A->heapsize = A->size;
     for (int i = (A->size) / 2; i > 0; i--){
-        cout << "----------Building the heap " << i << "-----------" << endl;
         //but the array start from 1 to n -1;
         maxHeapify(A, i - 1);
     }
     cout << "----------End building-----------" << endl;
 }
 
+//below is the function for max priority queus
+//get the max node
+int maximum (arr* arr){
+    return arr->array[0];
+}
+
+//get and remove the largest
+int heapExtractMax (arr* arr){
+    //conner case: zero node
+    if(arr->heapsize < 1) {
+        cout << "heap underfollow" << endl;
+        return 0;
+    }
+    else{
+        cout << "----------Extracting largest---------" << endl;
+        //the roof is the largest
+        int max = arr->array[0];
+        arr->array[0] = arr->array[arr->heapsize - 1];
+        arr->heapsize = arr->heapsize - 1;
+        arr->size = arr->size - 1;
+        //shrink the size
+        realloc(arr->array, sizeof(int) * arr->heapsize);
+        printArr(arr);
+        //maxHeapify(arr, 0);
+        return max;
+    }
+}
+
+//move up the increase node
+int heapIncreaseKey(arr* A,int index, int key){
+    if (key < A->array[index]) {
+        cout << "new key is smaller than current" << endl;
+        return 0;
+    }
+    else{
+        cout << "-----------Start increase value--------" << endl;
+        A->array[index] = key;
+        //move the node to proper layer
+        while(index >= 1 && A->array[parentNode(index)] < A->array[index]){
+            int temp = A->array[index];
+            A->array[index] = A->array[parentNode(index)];
+            A->array[parentNode(index)] = temp;
+            index = parentNode(index);
+        }
+        return 1;
+    }
+}
+
+//insertion = increase a -inf value to key 
+int maxHeapInsert (arr* A, int key){
+    cout << "---------Start insert node-----------" << endl;
+    A->heapsize = A->heapsize + 1;
+    
+    //realloc for new size
+    realloc(A->array ,sizeof(int) * A->heapsize);
+    
+    A->array[A->heapsize - 1] = -32767/2;
+    cout << A->array[A->heapsize - 1] << endl;
+    heapIncreaseKey(A, A->heapsize - 1, key);
+    A->size = A->size + 1;
+    return 1;
+}
+
 int main(int argc, char** argv) {
     arr* A = new arr;
     //for initializing
     A->size = 16;
+    A->array = (int*)malloc(sizeof(int) * A->size);
+    
+    
     generateRandom(A);
     buildHeap(A);
+    printArr(A);
+    
+    heapExtractMax(A);
+    //heapIncreaseKey(A, 9, 22);
+    printArr(A);
+    //maxHeapInsert(A, 13);
+    //printArr(A);
     
     for (int i = A->size; i > 0; i--){
         //let largest go to bottom
@@ -130,9 +195,9 @@ int main(int argc, char** argv) {
         A->heapsize = A->heapsize - 1;
         maxHeapify(A, 0);
     }
-    
-            printArr(A);
-    
+   
+    printArr(A);
+            
     return 0;
 }
 
