@@ -3,12 +3,33 @@
 
 using namespace std;
 
+
+void Q4updatePTR(int* &ptr){
+	*ptr = 10;
+}
+
+void Q4(){
+
+	int* ptr = new int(8);
+	cout << *ptr << endl;
+	Q4updatePTR(ptr);
+	cout << *ptr << endl;
+}
+//------------------------------------------Q5---------------------------------------------
+
+int Q5F9(const int &x){
+	//x = x + 1;
+	return (x + 2);
+}
+
+//watch out !one is pbr, one is pbv
+int Q5F10(int &a, int b){
+	a = a + b;
+	b = a + b;
+	return(a + b);
+}
+
 void Q5(){
-	//Fragement 1
-	// int* ptr = new int(8);
-	// cout << *ptr << endl;
-	// updatePTR(ptr);
-	// cout << *ptr << endl;
 
 	//Fragement 2
 	// int x = 1;
@@ -52,22 +73,115 @@ void Q5(){
 
 
 	//Fragement 7
-	int a = 1;
-	int b = 2;
-	int* w = &a;
-	int* x = &b;
-	int** y = &w;
-	int** z = &x;
-	*y = x;
-	*w = 3;
-	cout << b << endl;
+	// int a = 1;
+	// int b = 2;
+	// int* w = &a;
+	// int* x = &b;
+	// int** y = &w;
+	// int** z = &x;
+	// *y = x;
+	// *w = 3;
+	// cout << b << endl;
 
+	//Fragement 9
+	// int z = 1;
+	// int y = F9(z);
+	// cout << y << endl;
+
+	//Fragement 10
+	int i1 = 1, i2 = 2, i3;
+	i3 = Q5F10(i1, i2);
+	i3 += i1 + i2;
+	cout << i3 << endl;
+}
+
+//-----------------------------------------_Q6---------------------------------------
+
+void Q6(){
+	//note here: we can touch the momery beyond the array
+	//cos the size is the size of memory not the limit
+	int MAX = 10;
+	int list[MAX];
+	int sum = 0;
+	for(int i = 0; i < 20; i++){
+		list[i] = i;
+		cout << list[i] << endl;
+	}
+	for (int i = 0; i < 20; i++)
+		sum = sum + list[i];
+	cout << sum << endl;
 
 }
 
+//-----------------------------------------QQQQQQQQQ7-----------------------------------
+
+
+void Q7(){
+	int n;
+	cout << "printmultiples";
+	cin >> n;
+	if(cin.fail() == true){
+		cin.clear();
+		cin.ignore(1000, '\n');
+	}
+	else{
+		for(int i = 0; i < n; i++){
+			int emplnum;
+			cin >> emplnum;
+			if(cin.fail() == true){
+				cin.clear();
+				cin.ignore(1000, '\n');
+				break;
+			}
+			else{
+				cout << "OUTPUT " << emplnum << endl;
+			}
+		}
+		cout << "Done" << endl;
+	}
+
+}
+//--------------------------------------Q10---------------------------------------------------
+class BaseC{
+private:
+	int a, b;
+	void help(){
+		cout << "HELP" << endl;
+	}
+public:
+	int c, d;
+	void print(){
+		cout << "hh" << endl;
+	}
+};
+
+void Q10(){
+	BaseC base;
+	BaseC* baseptr = new BaseC();
+	//fail: private member
+	base.a = 0;
+	//good: public
+	base.c = 0;
+	//good: public
+	base.print();
+	//fail: invalid usage of constructor
+	base.BaseC();
+	//fail: nohelp is the scope
+	baseptr->nohelp();
+	//fail: no constructor in the class
+	BaseC A(0);
+	//fail: cannot detect the this
+	this->print();
+	//fail: expect pointer
+	delete base;
+	//fail: require left operand
+	&base = baseptr;
+	//good: pointer 
+	(*baseptr).c = 5;
+}
 
 
 int main(int argc, char const *argv[]){
-	/* code */
+	Q10();
 	return 0;
 }
