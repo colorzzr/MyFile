@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <string>
+#include <iomanip>
 
 using namespace std;
 
@@ -292,7 +293,72 @@ void Q13(){
 	test.print();
 }
 
+//-------------------------------------Q14------------------------------------------------------
+class Matrix {
+private:
+	double **the_matrix;
+ 	int num_rows; // Square matrix, so num_cols = num_rows
+public:
+ 	Matrix (int num_rows);
+ 	double get_element (int irow, int icol);
+ 	void set_element (int irow, int icol, double value);
+ 	int get_num_rows () {return (num_rows); }
+};
+
+/*****************
+ * focus on      *
+ *****************
+ *  X A B C D    *
+ *  a X E F G    *
+ *  b e X H I    *
+ *  c f h X J    *
+ *  d g i j X    *	
+ *****************/ 
+void transpose (Matrix &my_matrix){
+	int size = my_matrix.get_num_rows();
+	for(int i = 0; i < (size - 1); i++){
+		for(int j = i + 1; j < size; j++){
+			int temp = my_matrix.get_element(i, j);
+			my_matrix.set_element(i, j, my_matrix.get_element(j, i));
+			my_matrix.set_element(j, i, temp);
+		}
+	}
+}
+Matrix::Matrix (int _num_rows) {
+ 	int irow, icol, num_cols, k;
+
+ 	num_rows = _num_rows;
+ 	num_cols = num_rows; // Square matrix
+ 	the_matrix = new double *[num_rows];
+ 	for (irow = 0; irow < num_rows; irow++)
+ 		the_matrix[irow] = new double [num_cols];
+ 	
+ 	k = 0;
+ 	for (irow = 0; irow < num_rows; irow++)
+ 		for (icol = 0; icol < num_cols; icol++)
+ 			the_matrix[irow][icol] = k++;
+} 
+double Matrix::get_element (int irow, int icol){
+ 	return (the_matrix[irow][icol]);
+}
+void Matrix::set_element (int irow, int icol, double value){
+ 	the_matrix[irow][icol] = value;
+} 
+
+void Q14(){
+	int i, j;
+ 	int N = 5;
+ 	Matrix my_matrix(N);
+ 	transpose(my_matrix);
+ 	for (i = 0; i < N; i++){
+ 		cout << endl;
+ 		for (j = 0; j < N; j++)
+ 			cout << setw(5) << my_matrix.get_element(i, j);
+ 	} 
+}
+
+
 int main(int argc, char const *argv[]){
-	Q13();
+	Q14();
 	return 0;
 }
