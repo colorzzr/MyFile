@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdlib>
+#include <string>
 
 using namespace std;
 
@@ -18,6 +19,7 @@ void Q4(){
 //------------------------------------------Q5---------------------------------------------
 
 int Q5F9(const int &x){
+	//cannot modify a constant
 	//x = x + 1;
 	return (x + 2);
 }
@@ -103,11 +105,11 @@ void Q6(){
 	int MAX = 10;
 	int list[MAX];
 	int sum = 0;
-	for(int i = 0; i < 20; i++){
+	for(int i = 0; i < 20; i++){ //<-lwak
 		list[i] = i;
 		cout << list[i] << endl;
 	}
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < 20; i++) //<-lwak
 		sum = sum + list[i];
 	cout << sum << endl;
 
@@ -141,6 +143,40 @@ void Q7(){
 	}
 
 }
+
+//--------------------------------------Q9-----------------------------------------------------
+
+class Golfer{
+private:
+	char* fullName;
+	int games;
+	int* scores;
+public:
+	Golfer(){
+		cout << "Loading constructor" << endl;
+	}
+	Golfer(string name){
+		cout << "Loading name constructor" << endl;
+	}
+	Golfer(string name,int g){
+		cout << "Loading name int constructor" << endl;
+	}
+	~Golfer(){
+		cout << "Loading destructor" << endl;
+	}
+};
+
+void Q9(){
+	//Loading constructor
+	Golfer nancy;
+	//Loading name constructor
+	Golfer lulu("little lulu");
+	//Loading name int constructor
+	Golfer roy("roy hobbs", 12);
+	//Loading constructor
+	Golfer *par = new Golfer();
+}
+
 //--------------------------------------Q10---------------------------------------------------
 class BaseC{
 private:
@@ -156,32 +192,107 @@ public:
 };
 
 void Q10(){
-	BaseC base;
-	BaseC* baseptr = new BaseC();
-	//fail: private member
-	base.a = 0;
-	//good: public
-	base.c = 0;
-	//good: public
-	base.print();
-	//fail: invalid usage of constructor
-	base.BaseC();
-	//fail: nohelp is the scope
-	baseptr->nohelp();
-	//fail: no constructor in the class
-	BaseC A(0);
-	//fail: cannot detect the this
-	this->print();
-	//fail: expect pointer
-	delete base;
-	//fail: require left operand
-	&base = baseptr;
-	//good: pointer 
-	(*baseptr).c = 5;
+	// BaseC base;
+	// BaseC* baseptr = new BaseC();
+	// //fail: private member
+	// base.a = 0;
+	// //good: public
+	// base.c = 0;
+	// //good: public
+	// base.print();
+	// //fail: invalid usage of constructor
+	// base.BaseC();
+	// //fail: nohelp is the scope
+	// baseptr->nohelp();
+	// //fail: no constructor in the class
+	// BaseC A(0);
+	// //fail: cannot detect the this
+	// this->print();
+	// //fail: expect pointer
+	// delete base;
+	// //fail: require left operand
+	// &base = baseptr;
+	// //good: pointer 
+	// (*baseptr).c = 5;
 }
 
+//---------------------------------------Q11-----------------------------------------------
+class Point{
+public:
+	int x;
+	int y;
+	Point(int i , int j);
+	Point incrementX();
+	Point incrementY();
+	void print();
+};
+Point::Point(int i, int j){
+	x = i;
+	y = j;
+}
+Point Point::incrementX(){
+	x++;
+	return(*this);
+}
+Point Point::incrementY(){
+	y++;
+	return(*this);
+}
+void Point::print(){
+	cout << "(" << x << "," << y << ")" << endl;
+}
+
+void Q11(){
+	/********************************************************************************
+	 * You construct the Point with values (2, 3).									*
+	 * The first call to incrementX operates on your original instance 				*
+	 * (which is now value (3,3)) and passes out a copy on return.					*
+	 * incrementY operates on the temporary copy and updates its value to (3, 4).	*
+	 * It also returns a copy.														*
+	 * You print the second temporary copy with the expected result (3,4).			*
+	 * Now a.print() displays your original Point which has not been touched 		*
+	 * since the call to incrementX and that displays (3,3).						*
+	 ********************************************************************************/
+	Point a(2,3);
+	a.incrementX().incrementY().print();
+	a.print();
+}
+
+//----------------------------------------Q13---------------------------------------------------
+class Complex{
+private: 
+	double real;
+	double image;
+public:
+	Complex(double real_, double image_){
+		real = real_;
+		image =image_;
+	}
+	/********************************************
+	 * So the case is 							*
+	 * even not same object but same class?		*
+	 * inside the public function				*
+	 * one object can access to the another's   *
+	 * private member							*
+	 ********************************************/
+	Complex multiple(Complex& lhs, Complex& rhs){
+		lhs.real = real * rhs.real;
+		lhs.image = image * rhs.image;
+		return (*this);
+	}
+	void print(){
+		cout << "real: " << real << "image: " << image << endl;
+	}
+};
+
+void Q13(){
+	Complex test(10, 7.8);
+	Complex testy(2, 2);
+	test.multiple(test, testy);
+	test.print();
+}
 
 int main(int argc, char const *argv[]){
-	Q10();
+	Q13();
 	return 0;
 }
