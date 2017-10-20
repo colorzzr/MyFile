@@ -1,10 +1,37 @@
 #include <iostream>
 #include <cstdlib>
 #include <string>
+#include <sstream>
 #include <iomanip>
 
 using namespace std;
+//---------------------------------------Q1-----------------------------------------------
+bool getNextInt(int &x, stringstream &ss){
+	do{
+		char temp;
+		ss >> temp;
+		cout << temp << endl;
+		if(temp >= '0' && temp <= '9'){
+			x = temp - '0';
+			return true;
+		}
+		else continue;
+	}while(ss.eof() != true);
+	return false;
+}
+void Q1() {
+ 	int x ;
+ 	string temp;
+ 	getline(cin, temp);
+ 	stringstream ss (temp);
+ 	if( getNextInt(x,ss))
+ 		cout << "The first token is "  << x << endl ;
+ 	else
+ 		cout << "Error: first token is not an int" << endl ;
+}
 
+
+//-----------------------------------------Q4------------------------------------------------
 class DayOfYear {
 private:
  	int day; int month;
@@ -94,7 +121,7 @@ AnExampleClass::~AnExampleClass () {
  	cout << "Destructing object with value " << value << endl;
 }
 
-AnExampleClass a;
+//AnExampleClass a;
 void mysteryy() {
  	cout << "Entering mystery" << endl;
  	AnExampleClass x(100);
@@ -173,7 +200,131 @@ void Q6(){
 
 }
 
+//------------------------------------------Q7-----------------------------------------
+class Mystery {
+private:
+	int value;
+public:
+	Mystery (const Mystery & s){}
+	Mystery (const string & s){}
+	~Mystery (){}
+	int getValue() const{}
+	void setValue(int i){}
+	bool operator<(const Mystery & rhs){}
+};
+
+void Q7(){
+	Mystery d("ddd");
+	Mystery e("eee");
+	Mystery f("fff");
+	Mystery j("fff");
+	Mystery Y("fff");
+	int v;
+	string sv, X;
+	sv = "jjjjjj";
+	//Question start here
+	//fail no default constructor
+	//Mystery s;
+	//good 
+ 	Mystery a(sv);
+ 	//good 
+ 	Mystery W(X); 
+
+ 	Mystery c = sv; 
+ 	//cout << f.getValue(); 
+ 	(d < e); 
+ 	Mystery h = j;
+ 	
+ 	//good
+ 	//Y = W;
+
+ 	//fail: assign different
+ 	//but not show warning why?<--------------------------------------------
+ 	e = sv;
+	
+	//fail: to load int to class
+ 	//e < v; 
+	
+	//fai: access to private member
+ 	//cout << f.value; 
+
+ 	//fail: no member function
+ 	//f = d + e;
+}
+
+//------------------------------------------------Q8-----------------------------------------
+class Complex {
+private:
+ 	float real;
+ 	float imag;
+public:
+ 	Complex(); // Default constructor
+ 	Complex(float r, float imag); // Second constructor
+ 	int getReal(); int getImag();
+ 	void setReal(float r);
+ 	void setImag(float i);
+ 	void print();
+};
+
+//------------------------------------------Q11------------------------------------------
+int compute (int i1) {
+ 	i1 = i1 + 3;
+ 	return (i1);
+}
+int compute (int i1, int& i2) {
+ 	i1 = i1 + 4;
+ 	i2 = i1 + i2;
+ 	return (i1 + i2);
+}
+int compute2 (const int& i1) {
+ 	return (i1 + i1);
+}
+void Q11() {
+ 	int ival1 = 2;
+ 	int ival2 = 3;
+ 	int resVal = compute (ival1, ival2);
+ 	resVal = resVal + compute (ival2);
+ 	resVal = resVal + compute2 (ival2);
+ 	//resVal is 45
+ 	cout << "resVal is " << resVal << endl;
+}
+
+//-------------------------------------Q12--------------------------------------------------
+class Number {
+ 	private:
+ 	int _number;
+ 	public:
+ 	Number ();
+ 	Number (int v);
+ 	void increment () const;
+ 	void copy_and_destroy (const Number & other);
+ 	void print() const;
+};
+
+Number::Number () {
+ 	_number = 0;
+}
+
+Number::Number (int num) {
+ 	_number = num;
+}
+
+// //error: assignment of member ‘Number::_number’ in read-only object
+// void Number::increment () const {
+//  	_number = _number + 1;
+// }
+
+// void Number:: copy_and_destroy (const Number & other) {
+//  	_number = other._number;
+//  	//assignment of member ‘Number::_number’ in read-only object
+//  	other._number = 0;
+// }
+
+void Number::print() const {
+ 	cout << _number << endl;
+}
+
 int main(int argc, char const *argv[]){
-	Q6();
+	Q11();
 	return 0;
 }
