@@ -324,6 +324,25 @@ void Number::print() const {
  	cout << _number << endl;
 }
 
+//----------------------------------------Q12---------------------------------------------
+void Q12(){
+	string fileName;
+	cin >> fileName;
+	ifstream load(fileName);
+	if(load.fail()) cout << "cannot open" << endl;
+	int words = 0, line = 0;
+	while(load.eof() != true){
+		char temp;
+		load.get(temp);
+		if(temp == '\n') line++;
+		else words++;
+	}
+	
+	cout << words << endl;
+	cout << line << endl;
+	return 0;
+}
+
 int main(int argc, char const *argv[]){
 	Q11();
 	return 0;
