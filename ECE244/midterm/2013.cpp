@@ -226,21 +226,21 @@ void Q7(){
 	//fail no default constructor
 	//Mystery s;
 	//good 
- 	Mystery a(sv);
+ 	//Mystery a(sv);
  	//good 
- 	Mystery W(X); 
+ 	//Mystery W(X); 
 
- 	Mystery c = sv; 
+ 	//Mystery c = sv; 
  	//cout << f.getValue(); 
- 	(d < e); 
- 	Mystery h = j;
+ 	//(d < e); 
+ 	//Mystery h = j;
  	
  	//good
  	//Y = W;
 
  	//fail: assign different
  	//but not show warning why?<--------------------------------------------
- 	e = sv;
+ 	//e = sv;
 	
 	//fail: to load int to class
  	//e < v; 
@@ -249,7 +249,7 @@ void Q7(){
  	//cout << f.value; 
 
  	//fail: no member function
- 	//f = d + e;
+ 	f = d + e;
 }
 
 //------------------------------------------------Q8-----------------------------------------
@@ -325,25 +325,25 @@ void Number::print() const {
 }
 
 //----------------------------------------Q12---------------------------------------------
-void Q12(){
-	string fileName;
-	cin >> fileName;
-	ifstream load(fileName);
-	if(load.fail()) cout << "cannot open" << endl;
-	int words = 0, line = 0;
-	while(load.eof() != true){
-		char temp;
-		load.get(temp);
-		if(temp == '\n') line++;
-		else words++;
-	}
+// void Q12(){
+// 	string fileName;
+// 	cin >> fileName;
+// 	ifstream load(fileName);
+// 	if(load.fail()) cout << "cannot open" << endl;
+// 	int words = 0, line = 0;
+// 	while(load.eof() != true){
+// 		char temp;
+// 		load.get(temp);
+// 		if(temp == '\n') line++;
+// 		else words++;
+// 	}
 	
-	cout << words << endl;
-	cout << line << endl;
-	return 0;
-}
+// 	cout << words << endl;
+// 	cout << line << endl;
+// 	//return 0;
+// }
 
 int main(int argc, char const *argv[]){
-	Q11();
+	Q7();
 	return 0;
 }
