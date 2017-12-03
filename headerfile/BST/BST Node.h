@@ -24,12 +24,12 @@ private:
 	 * Guard for all tree algorithm	*
 	 * 1-> node -1-> Guard			*
 	 ********************************/
-	int Guard;
+	int guard;
 
 	/********************************
 	 *check the total node in tree	*
 	 ********************************/
-	static int numberOfNode;
+	int numberOfNode;
 public:
 	//condestructor
 	BSTNode();
@@ -41,15 +41,18 @@ public:
 	virtual BSTNode* getLeft();
 	virtual BSTNode* getRight();
 	virtual BSTNode* getParent();
+	virtual int getGuard();
+
 
 	//set function
 	virtual void setKey(int _key);
 	virtual void setLeft(BSTNode* _left);
 	virtual void setRight(BSTNode* _right);
 	virtual void setParent(BSTNode* _parent);
+	virtual void setGuard(int _guard);
 
 	//other
-	virtual void print() = 0;
+	virtual void print();
 };
 
 #endif
