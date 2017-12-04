@@ -29,7 +29,7 @@ private:
 	/********************************
 	 *check the total node in tree	*
 	 ********************************/
-	int numberOfNode;
+	static int numberOfNode;
 public:
 	//condestructor
 	BSTNode();

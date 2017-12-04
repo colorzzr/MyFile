@@ -3,17 +3,24 @@
 
 using namespace std;
 
-static int numberOfNode = 0 ;
+int BSTNode::numberOfNode = 0 ;
 
 //--------------------------------------condestructor--------------------------------
 BSTNode::BSTNode(){
 	numberOfNode++;
+	guard = -1;
+	cout << numberOfNode << endl;
 }
 BSTNode::BSTNode(int _key){
 	key = _key;
+	guard = 1;
+	left = new BSTNode;
+	right = new BSTNode;
+	parent = NULL;
+	numberOfNode++;
 }
 BSTNode::~BSTNode(){
-
+	numberOfNode--;
 }
 
 //----------------------------------------get fucntion---------------------------------
@@ -58,6 +65,6 @@ void BSTNode::setGuard(int _guard){
 }
 //--------------------------------------other--------------------------------------
 void BSTNode::print(){
-	cout << key << endl;
+	cout << "Key is " << key << endl;
 	cout << "number of node: " << numberOfNode << endl;
 }
