@@ -34,5 +34,17 @@ public:
 	 ****************************************/
 	void insertNode(BSTNode* insertOne);
 
+	/****************************************
+	 * the deletion would keep the balance  *
+	 ****************************************/
+	void deleteNode(BSTNode* targetNode);
+
+	/****************************
+	 * Find the left max Node 	*
+	 ****************************/
+	BSTNode* findLeftMax(BSTNode* startNode);
+
+
+
 };
 #endif

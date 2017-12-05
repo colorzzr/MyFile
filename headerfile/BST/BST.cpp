@@ -69,3 +69,41 @@ void BST::insertNode(BSTNode* insertOne){
 	}
 
 }
+
+void BST::deleteNode(BSTNode* targetNode){
+	//conner case there is no left childen
+	if(targetNode->getLeft()->getGuard() == -1){
+		delete targetNode->getLeft();
+		BSTNode* temp = targetNode->parent();
+		//double link
+		temp->setRight(targetNode->getRight());
+		temp->getRight()->setParent(temp);
+		delete targetNode;
+	}
+	else{
+		BSTNode* temp = findLeftMax(targetNode->getLeft());
+		targetNode->setKey(temp->getKey());
+		//left child of target
+		if(checkLOrR(temp)){
+			targetNode->setLeft(temp->getLeft);
+			targetNode->getLeft()->setParent(targetNode);
+			delete targetNode->getRight();
+			delete targetNode;
+		}
+		else{
+			BSTNode* parent = temp->getParent();
+			parent->setRight(temp->getLeft());
+			parent->getRight()->setParent(parent);
+			delete temp->getRight();
+			delete temp;
+
+		}
+	}
+}
+
+BSTNode* BST::findLeftMax(BSTNode* startNode){
+	while(1){
+		if(startNode->getGuard() == -1) return startNode->getParent();
+		else startNode = startNode->getRight();
+	}
+}
