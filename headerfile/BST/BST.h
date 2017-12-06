@@ -17,6 +17,7 @@ public:
 	BSTNode* getHead();
 
 	//operation function
+	void operatingOnTree();
 
 	/************************************************************
 	 * this function would use recursion to print whole Tree 	*
@@ -44,6 +45,11 @@ public:
 	 ****************************/
 	BSTNode* findLeftMax(BSTNode* startNode);
 
+	/************************************
+	 * Find the node with specific key	*
+	 * and return a pointer to that Node*
+	 ************************************/
+	BSTNode* findNode(int key);
 
 
 };

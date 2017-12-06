@@ -9,13 +9,15 @@ int BSTNode::numberOfNode = 0 ;
 BSTNode::BSTNode(){
 	numberOfNode++;
 	guard = -1;
-	cout << numberOfNode << endl;
+	key = -32767;
 }
 BSTNode::BSTNode(int _key){
 	key = _key;
 	guard = 1;
 	left = new BSTNode;
+	left->parent = this;
 	right = new BSTNode;
+	right->parent = this;
 	parent = NULL;
 	numberOfNode++;
 }

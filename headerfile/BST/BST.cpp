@@ -64,8 +64,8 @@ void BST::insertNode(BSTNode* insertOne){
 			}
 			return;
 		}
-		else if(temp->getKey() < insertOne->getKey()) temp = temp->getLeft();
-		else temp = temp->getRight();
+		else if(temp->getKey() < insertOne->getKey()) temp = temp->getRight();
+		else temp = temp->getLeft();
 	}
 
 }
@@ -74,21 +74,33 @@ void BST::deleteNode(BSTNode* targetNode){
 	//conner case there is no left childen
 	if(targetNode->getLeft()->getGuard() == -1){
 		delete targetNode->getLeft();
-		BSTNode* temp = targetNode->parent();
-		//double link
-		temp->setRight(targetNode->getRight());
-		temp->getRight()->setParent(temp);
-		delete targetNode;
+
+		//check the LORchildren
+		if(checkLOrR(targetNode)){
+			BSTNode* temp = targetNode->getParent();
+			//double link
+			temp->setLeft(targetNode->getRight());
+			temp->getLeft()->setParent(temp);
+			delete targetNode;
+		}
+		else{
+			BSTNode* temp = targetNode->getParent();
+			//double link
+			temp->setRight(targetNode->getRight());
+			temp->getRight()->setParent(temp);
+			delete targetNode;
+		}
+		
 	}
 	else{
 		BSTNode* temp = findLeftMax(targetNode->getLeft());
 		targetNode->setKey(temp->getKey());
 		//left child of target
 		if(checkLOrR(temp)){
-			targetNode->setLeft(temp->getLeft);
+			targetNode->setLeft(temp->getLeft());
 			targetNode->getLeft()->setParent(targetNode);
-			delete targetNode->getRight();
-			delete targetNode;
+			delete temp->getRight();
+			delete temp;
 		}
 		else{
 			BSTNode* parent = temp->getParent();
@@ -105,5 +117,18 @@ BSTNode* BST::findLeftMax(BSTNode* startNode){
 	while(1){
 		if(startNode->getGuard() == -1) return startNode->getParent();
 		else startNode = startNode->getRight();
+	}
+}
+
+BSTNode* BST::findNode(int key){
+	BSTNode* temp = headList->getLeft();
+	while(1){
+		if(temp->getGuard() == -1){
+			cout << "Error: cannot find node" << endl;
+			return NULL;
+		}
+		else if(temp->getKey() == key)return temp; 
+		else if(temp->getKey() < key) temp = temp->getRight();
+		else temp = temp->getLeft();
 	}
 }
