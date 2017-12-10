@@ -51,6 +51,12 @@ public:
 	 ************************************/
 	BSTNode* findNode(int key);
 
+	/********************************************************
+	 * function would generate a tree based on input "size"	*
+	 * and using input "seed" to generate ramdon numebr		*
+	 ********************************************************/
+	void generateTree(int size, int seed);
+
 
 };
 #endif

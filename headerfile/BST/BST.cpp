@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <cstdlib>
 #include "BST.h"
 
 BST::BST(){
@@ -127,8 +127,20 @@ BSTNode* BST::findNode(int key){
 			cout << "Error: cannot find node" << endl;
 			return NULL;
 		}
+		//find the node
 		else if(temp->getKey() == key)return temp; 
+		//else go left or right
 		else if(temp->getKey() < key) temp = temp->getRight();
 		else temp = temp->getLeft();
+	}
+}
+
+
+void BST::generateTree(int size, int seed){
+	srand(seed);
+	while(size > 0){
+		BSTNode* newNode = new BSTNode(rand() % 40);
+		insertNode(newNode);
+		size--;
 	}
 }
