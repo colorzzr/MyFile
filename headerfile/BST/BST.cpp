@@ -13,7 +13,7 @@ BST::BST(){
 }
 
 BST::~BST(){
-
+	delete headList;
 }
 
 //----------------------------------------------get function------------------------------------------
@@ -93,7 +93,7 @@ void BST::deleteNode(BSTNode* targetNode){
 		
 	}
 	else{
-		BSTNode* temp = findLeftMax(targetNode->getLeft());
+		BSTNode* temp = findMax(targetNode->getLeft());
 		targetNode->setKey(temp->getKey());
 		//left child of target
 		if(checkLOrR(temp)){
@@ -113,10 +113,16 @@ void BST::deleteNode(BSTNode* targetNode){
 	}
 }
 
-BSTNode* BST::findLeftMax(BSTNode* startNode){
+BSTNode* BST::findMax(BSTNode* startNode){
 	while(1){
 		if(startNode->getGuard() == -1) return startNode->getParent();
 		else startNode = startNode->getRight();
+	}
+}
+BSTNode* BST::findMin(BSTNode* startNode){
+	while(1){
+		if(startNode->getGuard() == -1) return startNode->getParent();
+		else startNode = startNode->getLeft();
 	}
 }
 
@@ -139,8 +145,36 @@ BSTNode* BST::findNode(int key){
 void BST::generateTree(int size, int seed){
 	srand(seed);
 	while(size > 0){
-		BSTNode* newNode = new BSTNode(rand() % 40);
+		BSTNode* newNode = new BSTNode(rand() % 50);
 		insertNode(newNode);
 		size--;
 	}
+}
+
+int BST::checkKey(int value){
+	if(headList->getLeft()->getGuard() == -1) return 0;
+	else return headList->getLeft()->checkKey(value);
+}
+
+void BST::printPreorder(BSTNode* node){
+	if(node->getGuard() == -1) return;
+	node->print();
+	printPreorder(node->getLeft());
+	printPreorder(node->getRight());
+}
+
+bool BST::isBST(){
+	//headList->getLeft()->print();
+	return headList->getLeft()->checkBST(headList->getLeft());
+}
+
+void BST::reverseOrder(BSTNode* node){
+	// if(node->getGuard() == -1) return;
+	// reverseOrder(node->getRight());
+	// node->print();
+	// reverseOrder(node->getLeft());
+	// return;
+	if(node->getRight()->getGuard() != -1) reverseOrder(node->getRight());
+	node->print();
+	if(node->getLeft()->getGuard() != -1) reverseOrder(node->getLeft());
 }

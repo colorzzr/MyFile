@@ -53,6 +53,23 @@ public:
 
 	//other
 	virtual void print();
+	/****************************************************
+	 * use recursive way to count total number of nodes	*
+	 * have same key with input "value"					*
+	 ****************************************************/
+	virtual int checkKey(int value);
+
+	/****************************
+	 * Find the max/min Node 	*
+	 ****************************/
+	virtual BSTNode* findMax(BSTNode* startNode);
+	virtual BSTNode* findMin(BSTNode* startNode);
+
+	/************************************************
+	 * the fucntion would check the tree is BST		*
+	 * based on the input "root"					*
+	 ************************************************/
+	virtual bool checkBST(BSTNode* root);
 };
 
 #endif

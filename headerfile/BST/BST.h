@@ -41,9 +41,10 @@ public:
 	void deleteNode(BSTNode* targetNode);
 
 	/****************************
-	 * Find the left max Node 	*
+	 * Find the max/min Node 	*
 	 ****************************/
-	BSTNode* findLeftMax(BSTNode* startNode);
+	BSTNode* findMax(BSTNode* startNode);
+	BSTNode* findMin(BSTNode* startNode);
 
 	/************************************
 	 * Find the node with specific key	*
@@ -57,6 +58,26 @@ public:
 	 ********************************************************/
 	void generateTree(int size, int seed);
 
+	/********************************************************
+	 * the function would return the total number of node 	*
+	 * have same key with input "value"						*
+	 ********************************************************/
+	int checkKey(int value);
 
+	/********************************************************
+	 * the finction printPreorder would print the tree using*
+	 * DFS order same as graph								*
+	 ********************************************************/
+	void printPreorder(BSTNode* node);
+
+	/************************************************
+	 * the fucntion would check the tree is BST		*
+	 ************************************************/
+	bool isBST();
+
+	/****************************************
+	 * print tree as CBA reverse of inorder	*
+	 ****************************************/
+	void reverseOrder(BSTNode* node);
 };
 #endif

@@ -28,9 +28,16 @@ int main(int argc, char const *argv[]){
 	// 	BSTNode* temp = tree->findNode(array[i]);
 	// 	tree->deleteNode(temp);
 	// }
-	
-	tree->generateTree(10, 99);
+	// cout << tree->checkKey(4) << endl;
+	tree->generateTree(5, 99);
 	tree->printTree(tree->getHead()->getLeft());
+	//cout << tree->checkKey(4) << endl;
+	cout << "111111111111111111111111111" << endl;
+	//tree->printPreorder(tree->getHead()->getLeft());
+	//cout << tree->isBST() << endl;
+	//delete tree;
+	tree->reverseOrder(tree->getHead()->getLeft());
+
 
 	return 0;
 }
