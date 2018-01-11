@@ -11,15 +11,12 @@
 #########################################
 
 Input_List:
-	.word 7, 2, 5 ,4
+	.word 5, 4, 3 , 2, 1, 0, 8, 4#, 3
 
 .global _start
 _start:
-	# when there is only 2 in the array finish
-    movi r8, 1
-    
     # r9 and r10 is the index of i and j
-    movi r9, 3
+    movi r9, 7
     movi r10, 0
     
     # r11 is the pointer to the Input_List
@@ -29,8 +26,8 @@ _start:
     movia r12, Input_List
     
 Loopi:
-	# if i == size, then finish sort
-	beq r9, r8, Finish
+	# if i == 0, then finish sort
+	beq r9, r0, Finish
     
 Loopj:
 	# if j == i, then fhinsih netloop go to loop
@@ -61,11 +58,12 @@ LoopiIncre:
 	mov r10, r0
     # i--
     subi r9, r9, 1
-    # move to next place add + 4, reset (temp)r12 to (input)r11
-    addi r11, r11, 4
+    # reset (temp)r12 to (input)r11
     mov r12, r11
     
 	beq r0, r0, Loopi
 
     
 Finish:	
+	
+	
