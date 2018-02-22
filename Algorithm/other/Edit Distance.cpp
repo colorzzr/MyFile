@@ -8,6 +8,7 @@ string str1 = "ac";
 string str2 = "abb";
 int row, col;
 void printMap(int** checkMap){
+	cout << "printing map" << endl;
 	for(int i = 0; i < row ; i++){
 		for(int j = 0; j< col ; j++){
 			cout << checkMap[i][j] << ' ';
@@ -39,9 +40,11 @@ void DPCheck(int** checkMap){
 			 * because we only need previous operaiton to get	*
 			 * current string									*
 			 ****************************************************/
-			if(str1[i] == str2[j]) checkMap[i][j] = min;
+			if(str1[i - 1] == str2[j - 1])
+				checkMap[i][j] = min;
 			//else add 1 for 1 operation
-			else checkMap[i][j] = min + 1;
+			else
+				checkMap[i][j] = min + 1;
 		}
 	}
 }
